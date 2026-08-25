@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - canary
 
 permissions:
   contents: write
@@ -40,5 +41,7 @@ jobs:
             exit 1
           fi
 
+          git config user.name "release-tag-action"
+          git config user.email "release-tag-action@users.noreply.github.com"
           git tag -a "$next_tag" -m "Release $next_tag"
           git push origin "$next_tag"
